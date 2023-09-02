@@ -1,2 +1,5 @@
-package com.chess.engine.board;public class Move {
+package com.chess.engine.board;
+
+public class Move {
+
 }

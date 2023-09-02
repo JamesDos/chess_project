@@ -1,10 +1,27 @@
-
-
+package com.chess.engine.board;
+import com.chess.engine.pieces.Piece;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Tile {
 
-    int tileCords;
-    Tile(int tileCords) {
+    protected final int tileCords;
+    private static final Map<Integer, EmptyTile> emptyTiles = makeAllEmptyTiles();
+
+    private static Map<Integer, EmptyTile> makeAllEmptyTiles() {
+        final Map <Integer, EmptyTile> emptyTilesMap = new HashMap<>();
+        for (int i = 0; i < 64; i++) {
+            emptyTilesMap.put(i, new EmptyTile(i));
+        }
+        return Collections.unmodifiableMap(emptyTilesMap);
+    }
+
+    public static Tile createTile(final int tileCords, final Piece piece) {
+        return piece != null ? new OccupiedTile(tileCords, piece) : emptyTiles.get(tileCords);
+    }
+
+    private Tile(int tileCords) {
         this.tileCords = tileCords;
     }
 
@@ -13,7 +30,7 @@ public abstract class Tile {
     public abstract Piece getPiece();
 
     public static final class EmptyTile extends Tile {
-        EmptyTile(int cords) {
+        private EmptyTile(int cords) {
             super(cords);
         }
 
@@ -25,10 +42,12 @@ public abstract class Tile {
             return null;
         }
     }
-    public static final class OccupiedTile extends Tile {
-        Piece pieceOnTile;
 
-        OccupiedTile(int tileCords, Piece pieceOnTile) {
+
+    public static final class OccupiedTile extends Tile {
+        private final Piece pieceOnTile;
+
+        private OccupiedTile(int tileCords, Piece pieceOnTile) {
             super(tileCords);
             this.pieceOnTile = pieceOnTile;
         }

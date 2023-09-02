@@ -1,2 +1,5 @@
-package com.chess.engine.board;public class Board {
+package com.chess.engine.board;
+
+public class Board {
+
 }

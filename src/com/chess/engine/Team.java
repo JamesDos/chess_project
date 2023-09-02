@@ -1,2 +1,4 @@
-package com.chess.engine;public enum Team {
+package com.chess.engine;
+
+public enum Team {
 }
