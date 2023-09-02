@@ -1,3 +1,6 @@
+
+
+
 public abstract class Tile {
 
     int tileCords;
@@ -15,18 +18,12 @@ public abstract class Tile {
         }
 
         @Override
-        public boolean isTileOccupied() {
-            return false;
-        }
+        public boolean isTileOccupied() { return false; }
 
         @Override
         public Piece getPiece() {
             return null;
         }
-
-
-
-
     }
     public static final class OccupiedTile extends Tile {
         Piece pieceOnTile;
